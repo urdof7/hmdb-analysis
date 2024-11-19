@@ -13,8 +13,8 @@ def create_database():
         dbname="postgres",
         user=os.getenv("DB_USER"), #fetch DB_user from enviornment variables
         password=os.getenv("DB_PASSWORD"), #fetch from enviornment variables
-        host=os.getenv("localhost"),
-        port=os.getenv("5432")
+        host=("localhost"),
+        port=("5432")
     )
     conn.autocommit = True
     cursor = conn.cursor()
@@ -158,8 +158,8 @@ def extract_atom_bond_blocks(mol_block):
 
 def main():
     # Define file names
-    sdf_file = 'data/structures.sdf'
-    sql_file = 'scripts/create_hmdb_schema.sql'
+    sdf_file = os.path.join(os.path.dirname(__file__), "../data/structures.sdf")
+    sql_file = os.path.join(os.path.dirname(__file__), "create_hmdb_schema.sql")
 
     # Check if files exist in the current directory
     if not os.path.exists(sdf_file):
