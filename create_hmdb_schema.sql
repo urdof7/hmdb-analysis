@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS molecules;
 
 -- Create molecules table
 CREATE TABLE molecules (
-    molecule_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    molecule_id SERIAL PRIMARY KEY,
     hmdb_id VARCHAR(20) UNIQUE NOT NULL,
     generic_name VARCHAR(255),
     formula VARCHAR(50),
@@ -20,7 +20,7 @@ CREATE TABLE molecules (
 
 -- Create structures table
 CREATE TABLE structures (
-    structure_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    structure_id SERIAL PRIMARY KEY,
     molecule_id INTEGER REFERENCES molecules(molecule_id) ON DELETE CASCADE,
     atom_block TEXT,
     bond_block TEXT
@@ -28,7 +28,7 @@ CREATE TABLE structures (
 
 -- Create properties table
 CREATE TABLE properties (
-    property_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    property_id SERIAL PRIMARY KEY,
     molecule_id INTEGER REFERENCES molecules(molecule_id) ON DELETE CASCADE,
     property_name VARCHAR(255),
     property_value VARCHAR(255)
@@ -36,14 +36,14 @@ CREATE TABLE properties (
 
 -- Create synonyms table
 CREATE TABLE synonyms (
-    synonym_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    synonym_id SERIAL PRIMARY KEY,
     molecule_id INTEGER REFERENCES molecules(molecule_id) ON DELETE CASCADE,
     synonym VARCHAR(255)
 );
 
 -- Create names table
 CREATE TABLE names (
-    name_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name_id SERIAL PRIMARY KEY,
     molecule_id INTEGER REFERENCES molecules(molecule_id) ON DELETE CASCADE,
     name_type VARCHAR(50),
     name VARCHAR(255)
