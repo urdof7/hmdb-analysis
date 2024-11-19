@@ -9,13 +9,13 @@ DROP TABLE IF EXISTS molecules;
 CREATE TABLE molecules (
     molecule_id SERIAL PRIMARY KEY,
     hmdb_id VARCHAR(20) UNIQUE NOT NULL,
-    generic_name VARCHAR(255),
+    generic_name TEXT,
     formula VARCHAR(50),
     molecular_weight FLOAT,
     exact_mass FLOAT,
     smiles TEXT,
     inchi TEXT,
-    inchi_key VARCHAR(255)
+    inchi_key TEXT
 );
 
 -- Create structures table
@@ -38,7 +38,7 @@ CREATE TABLE properties (
 CREATE TABLE synonyms (
     synonym_id SERIAL PRIMARY KEY,
     molecule_id INTEGER REFERENCES molecules(molecule_id) ON DELETE CASCADE,
-    synonym VARCHAR(255)
+    synonym TEXT
 );
 
 -- Create names table
@@ -46,7 +46,7 @@ CREATE TABLE names (
     name_id SERIAL PRIMARY KEY,
     molecule_id INTEGER REFERENCES molecules(molecule_id) ON DELETE CASCADE,
     name_type VARCHAR(50),
-    name VARCHAR(255)
+    name TEXT
 );
 
 -- Indexes to improve query performance
